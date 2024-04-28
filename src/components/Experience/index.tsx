@@ -14,12 +14,12 @@ const Experience = () => {
     const activeSection = searchParams.get('section');
 
     useEffect(() => {
-        const handleBegin = (args: any) => {
+        const handleBegin = (args: string) => {
             const searchParams = new URLSearchParams(location.search);
             searchParams.set("section", args);
             navigate(`?${searchParams.toString()}`, { replace: true });
         };
-        const handleEnd = (args: any) => {
+        const handleEnd = (args: string) => {
             console.log("end", args);
         };
 
