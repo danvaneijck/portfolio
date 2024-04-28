@@ -11,10 +11,10 @@ function App() {
 
   return (
     <div
-      className='bg-slate-800'
+      className='bg-slate-800 px-5'
     >
       <div
-        className='text-center pt-20 text-white flex flex-row justify-center items-center'
+        className='text-center pt-5 md:pt-40 text-white flex flex-col md:flex-row justify-center items-center'
       >
         <img
           src={logo}
@@ -23,17 +23,16 @@ function App() {
           alt="logo"
         />
         <div
-          className='ml-10 '
+          className='md:ml-10 pt-5 md:pt-0'
           style={{ fontFamily: 'BebasNeue' }}
         >
-          <span className='text-6xl text-slate-300 '>Hi, I'm </span>
-          <span className='text-7xl text-blue-300'>Dan Van Eijck</span>
-          <div className='text-4xl text-slate-300'>a full stack Software Engineer</div>
+          <span className='text-3xl md:text-6xl text-slate-300 '>Hi, I'm </span>
+          <span className='text-5xl md:text-7xl text-blue-300'>Dan Van Eijck</span>
+          <div className='text-4xl md:text-4xl text-slate-300'>a full stack Software Engineer</div>
         </div>
-
       </div>
       <div
-        className='flex flex-row justify-center text-white text-6xl pt-5 text-slate-300 h-20'
+        className='flex flex-row justify-center text-6xl pt-5 text-blue-200 h-20'
       >
         <a href='https://github.com/danvaneijck' target="_blank" rel="noopener noreferrer">
           <FaGithubSquare className='hover:text-blue-300 hover:cursor-pointer hover:text-7xl shadow-xl' />
@@ -50,7 +49,7 @@ function App() {
       </div>
 
       <div
-        className='text-white text-center pt-5 text-base pb-20 w-1/2 m-auto text-base flex flex-row justify-between items-center'
+        className='text-white text-center pt-5 text-base pb-20 md:w-1/2 m-auto text-base flex flex-col md:flex-row justify-center items-center'
         style={{ fontFamily: 'Roboto' }}
       >
         <div>
@@ -64,7 +63,7 @@ function App() {
         <img
           src={dan}
           style={{ height: 210 }}
-          className="ml-10 rounded-2xl shadow-2xl"
+          className="md:ml-10 rounded-2xl shadow-2xl"
           alt="dan"
         />
       </div>

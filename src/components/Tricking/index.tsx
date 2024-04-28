@@ -3,7 +3,6 @@ const Tricking = () => {
 
     return (
         <div>
-
         </div>
     )
 }

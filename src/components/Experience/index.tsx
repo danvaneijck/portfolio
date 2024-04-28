@@ -40,7 +40,7 @@ const Experience = () => {
             style={{ fontFamily: 'Arial' }}
         >
             <div
-                className=" text-center text-4xl flex flex-col mb-20"
+                className=" text-center text-5xl flex flex-col mb-20"
                 style={{ fontFamily: "BebasNeue" }}
             >
                 <Link
@@ -51,7 +51,7 @@ const Experience = () => {
                     offset={-70}
                     duration={500}
                 >
-                    Technical Skills
+                    <div className='ml-5'>Technical Skills</div>
                 </Link>
                 <Link
                     className={`text-slate-500 hover:text-slate-300 px-4 py-2 hover:cursor-pointer ${activeSection === 'personalProjects' ? 'text-white' : ''}`}
@@ -83,7 +83,7 @@ const Experience = () => {
                     Tricking
                 </Link>
             </div>
-            <div className='w-1/2 m-auto text-center text-white'>
+            <div className='lg:w-2/3 m-auto text-center text-white'>
                 <Element name="technicalSkills" className="element pt-24" style={{ fontFamily: "BebasNeue" }}>
                     <h2 className="text-4xl ">Technical Skills</h2>
                     <TechnicalSkills />
