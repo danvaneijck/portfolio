@@ -1,0 +1,18 @@
+[
+    {
+        "id": "1",
+        "key": "portfolio-website",
+        "title": "Portfolio Website",
+        "description": "A personal portfolio built with React and Tailwind CSS.",
+        "image": "/src/assets/logo.png",
+        "content": "# Portfolio Website\n\nThis is **my** portfolio site! It’s built with:\n\n- React & Tailwind CSS\n- A Django + Hasura backend\n- An interactive LLM‑driven chat bot\n\nLearn more by exploring the code on [GitHub](https://github.com/your-username/portfolio)."
+    },
+    {
+        "id": "2",
+        "title": "E-Commerce Store",
+        "key": "ecommerce-store",
+        "description": "Full-stack store with Django REST API and React frontend.",
+        "image": "/src/assets/logo.png",
+        "content": "## Features\n\n1. Product catalog with filters  \n2. Shopping cart & checkout  \n3. Admin dashboard  \n\n> Built using Django REST Framework and React."
+    }
+]
