@@ -1,16 +1,24 @@
-import { useSearchParams, useNavigate } from "react-router-dom"
-import projects from "../data/projects.json"
-import ProjectsGrid from "../components/Projects"
-import ReactMarkdown from "react-markdown"
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { PROJECTS_DATA } from "../data/projects";
+import ProjectsGrid from "../components/Projects";
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import { useEffect } from "react";
 
 const Projects: React.FC = () => {
-    const [searchParams] = useSearchParams()
-    const projectKey = searchParams.get("project")
-    const navigate = useNavigate()
+    const [searchParams] = useSearchParams();
+    const projectKey = searchParams.get("project");
+    const navigate = useNavigate();
 
     const project = projectKey
-        ? projects.find((p) => p.key === projectKey)
-        : null
+        ? PROJECTS_DATA.find((p) => p.key === projectKey)
+        : null;
+
+    useEffect(() => {
+        if (projectKey) {
+            window.scrollTo({ top: 0, behavior: "smooth" })
+        }
+    }, [projectKey])
 
     return (
         <div className="flex-1 flex flex-col  bg-gradient-to-b from-[#092327] to-[#4E8098] p-4">
@@ -23,25 +31,43 @@ const Projects: React.FC = () => {
                         >
                             ← Back to all projects
                         </button>
-                        <h2 className="text-3xl font-bold mb-2">{project.title}</h2>
-                        <img
-                            src={project.image}
-                            alt={project.title}
-                            className="w-full h-64 object-cover rounded mb-4"
-                        />
-                        <div className="prose prose-lg">
-                            <ReactMarkdown>{project.content}</ReactMarkdown>
+
+                        <div
+                            className="prose prose-lg 
+                        text-white 
+                        mx-auto my-10
+                        prose-headings:text-white 
+                        prose-code:text-white
+                        prose-strong:text-white
+                        prose-a:text-white
+                        prose-code:before:content-none 
+                        prose-code:after:content-none 
+                        prose-code:bg-gray-700 
+                        prose-code:px-1 
+                        prose-code:rounded 
+                        prose-pre:bg-gray-700
+                         prose-pre:text-white
+                         prose-img:max-w-xl 
+                         prose-img:mx-auto
+                         font-mono
+                         "
+                        >
+                            <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
+                                {project.content}
+                            </ReactMarkdown>
                         </div>
                     </div>
                 ) : (
                     <div>
-                        <div className="text-white mb-5 text-center font-bebas text-2xl md:text-4xl">Projects</div>
+                        <div className="text-white mb-5 text-center font-bebas text-2xl md:text-4xl">
+                            Projects
+                        </div>
                         <ProjectsGrid maxProjects={null} />
                     </div>
                 )}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Projects
+export default Projects;

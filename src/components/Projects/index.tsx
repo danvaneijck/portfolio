@@ -1,11 +1,11 @@
-import projects from "../../data/projects.json"
+import { PROJECTS_DATA } from "../../data/projects"
 import { Link } from "react-router-dom"
 
 const ProjectsGrid = ({ maxProjects }) => {
 
     const items = typeof maxProjects === "number"
-        ? projects.slice(0, maxProjects)
-        : projects
+        ? PROJECTS_DATA.slice(0, maxProjects)
+        : PROJECTS_DATA
 
     return (
         <>

@@ -1,3 +1,5 @@
+import typography from '@tailwindcss/typography'
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -28,14 +30,14 @@ export default {
         },
         marquee: {
           '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(-100%)' },
         },
       },
       animation: {
         slideUp: 'slideUp 0.3s ease-out forwards',
         float: "float 5s ease-in-out infinite",
         fadeIn: 'fadeIn 0.5s ease-in forwards',
-        marquee: 'marquee 20s linear infinite',
+        marquee: 'marquee 60s linear infinite',
       },
       fontFamily: {
         bebas: ['"Bebas Neue"', 'sans-serif'],
@@ -48,7 +50,8 @@ export default {
       addUtilities({
         '.animate-paused': { 'animation-play-state': 'paused' },
       }, ['responsive', 'hover']);
-    }
+    },
+    typography
   ],
 }
 

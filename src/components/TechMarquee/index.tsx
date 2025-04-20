@@ -1,22 +1,28 @@
 import { useState } from "react";
+import js from "../../assets/logos/js.webp"
+import python from "../../assets/logos/python.png"
+import typescript from "../../assets/logos/typescript.png"
+import react from "../../assets/logos/react.webp"
+import django from "../../assets/logos/django.png"
+import graphql from "../../assets/logos/graphql.png"
+import rust from "../../assets/logos/rust.png"
 
 type TechItem = { name: string; logo: string; description: string }
 
 // Replace with your actual data source
 const TECHS: TechItem[] = [
-    { name: 'JavaScript', logo: '/logos/js.png', description: 'JS description...' },
-    { name: 'TypeScript', logo: '/logos/ts.png', description: 'TS description...' },
-    { name: 'React', logo: '/logos/react.png', description: 'React description...' },
-    { name: 'Django', logo: '/logos/django.png', description: 'Django description...' },
-    { name: 'GraphQL', logo: '/logos/graphql.png', description: 'GraphQL description...' },
-    { name: 'Tailwind', logo: '/logos/tailwind.png', description: 'Tailwind description...' },
-    { name: 'Python', logo: '/logos/python.png', description: 'Python description...' },
-    { name: 'Node.js', logo: '/logos/node.png', description: 'Node.js description...' },
+    { name: 'JavaScript', logo: js, description: 'JS description...' },
+    { name: 'TypeScript', logo: typescript, description: 'TS description...' },
+    { name: 'React', logo: react, description: 'React description...' },
+    { name: 'Django', logo: django, description: 'Django description...' },
+    { name: 'GraphQL', logo: graphql, description: 'GraphQL description...' },
+    { name: 'Python', logo: python, description: 'Python description...' },
+    { name: 'Rust', logo: rust, description: 'Python description...' },
 ]
 
 export default function TechMarquee() {
     // Duplicate list for seamless loop
-    const items = [...TECHS, ...TECHS]
+    const items = [...TECHS, ...TECHS, ...TECHS]
     const [tooltip, setTooltip] = useState<{ text: string; x: number; y: number } | null>(null)
 
     const showTooltip = (e: React.MouseEvent, desc: string) => {
@@ -36,8 +42,8 @@ export default function TechMarquee() {
                         onMouseLeave={hideTooltip}
                         onClick={e => showTooltip(e, tech.description)}
                     >
-                        <img src={tech.logo} alt={tech.name} className="w-12 h-12 mb-2 drop-shadow" />
-                        <span className="text-sm font-semibold text-gray-800">{tech.name}</span>
+                        <img src={tech.logo} alt={tech.name} className="w-12 h-12 mb-2 drop-shadow rounded-lg mx-auto" />
+                        <div className="text-sm font-semibold text-gray-300 text-center">{tech.name}</div>
                     </div>
                 ))}
             </div>
