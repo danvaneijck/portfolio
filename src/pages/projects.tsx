@@ -22,9 +22,9 @@ const Projects: React.FC = () => {
 
     return (
         <div className="flex-1 flex flex-col  bg-gradient-to-b from-[#092327] to-[#4E8098] p-4">
-            <div className="pt-20 px-10">
+            <div className="pt-20 px-0 md:px-10">
                 {project ? (
-                    <div className="text-white  p-6max-w-3xl mx-auto">
+                    <div className="text-white md:p-6 max-w-3xl mx-auto">
                         <button
                             onClick={() => navigate("/projects")}
                             className="mb-4 text-emerald-500 hover:underline"
@@ -33,23 +33,24 @@ const Projects: React.FC = () => {
                         </button>
 
                         <div
-                            className="prose prose-lg 
-                        text-white 
-                        mx-auto my-10
-                        prose-headings:text-white 
-                        prose-code:text-white
-                        prose-strong:text-white
-                        prose-a:text-white
-                        prose-code:before:content-none 
-                        prose-code:after:content-none 
-                        prose-code:bg-gray-800 
-                        prose-code:p-1 
-                        prose-code:rounded 
-                        prose-pre:bg-gray-700
-                         prose-pre:text-white
-                         prose-img:max-w-xl 
-                         prose-img:mx-auto
-                         font-mono
+                            className="
+                            prose prose-lg 
+                            text-white 
+                            mx-auto my-10
+                            prose-headings:text-white 
+                            prose-code:text-white
+                            prose-strong:text-white
+                            prose-a:text-white
+                            prose-code:before:content-none 
+                            prose-code:after:content-none 
+                            prose-code:bg-gray-800 
+                            prose-code:p-1 
+                            prose-code:rounded 
+                            prose-pre:bg-gray-700
+                            prose-pre:text-white
+                            prose-img:max-w-xl 
+                            prose-img:mx-auto
+                            font-mono
                          "
                         >
                             <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
