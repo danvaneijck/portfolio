@@ -1,7 +1,11 @@
 import { PROJECTS_DATA } from "../../data/projects"
 import { Link } from "react-router-dom"
 
-const ProjectsGrid = ({ maxProjects }) => {
+const ProjectsGrid = ({
+    maxProjects,
+}: {
+    maxProjects?: number
+}) => {
 
     const items = typeof maxProjects === "number"
         ? PROJECTS_DATA.slice(0, maxProjects)
@@ -17,7 +21,7 @@ const ProjectsGrid = ({ maxProjects }) => {
                             bg-[#092327] text-white rounded-lg shadow p-4 flex flex-col
                             transform transition duration-300
                             hover:scale-105 hover:shadow-lg
-                            opacity-0 animate-fadeIn
+                            animate-fadeIn
                           `}
                         style={{ animationDelay: `${idx * 100}ms` }}
                     >

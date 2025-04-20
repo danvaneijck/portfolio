@@ -1,6 +1,6 @@
 // src/components/TechDiagram.tsx
-import React, { useEffect, useRef } from "react"
-import { animate, createDraggable, createScope, createSpring } from 'animejs';
+import { useEffect, useRef } from "react"
+import { createDraggable, createSpring } from 'animejs';
 import js from "../../assets/js.webp"
 import python from "../../assets/python.png"
 
@@ -23,7 +23,6 @@ const TECHS: Tech[] = [
 
 export default function TechDiagram() {
     const root = useRef(null);
-    const scope = useRef(null);
 
     useEffect(() => {
 

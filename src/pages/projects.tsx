@@ -62,7 +62,7 @@ const Projects: React.FC = () => {
                         <div className="text-white mb-5 text-center font-bebas text-2xl md:text-4xl">
                             Projects
                         </div>
-                        <ProjectsGrid maxProjects={null} />
+                        <ProjectsGrid maxProjects={undefined} />
                     </div>
                 )}
             </div>

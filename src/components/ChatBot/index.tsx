@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react"
 import { gql, useMutation, useQuery } from "@apollo/client"
 import { v4 as uuidv4 } from "uuid"
-import dayjs from "dayjs"
+import dayjs from "dayjs";
 import chatFigure from "../../assets/chat_figure.png"
 
 const CREATE_SESSION = gql`
@@ -35,13 +35,19 @@ const GET_MESSAGES = gql`
   }
 `
 
+interface Message {
+    id: number
+    role: string
+    content: string
+    timestamp: string
+}
+
 const ChatBot = ({ agentId }: { agentId: number }) => {
     const [sessionId] = useState(uuidv4())
     const [input, setInput] = useState("")
-    const [messages, setMessages] = useState<any[]>([])
+    const [messages, setMessages] = useState<Message[]>([])
     const chatEndRef = useRef<HTMLDivElement>(null)
     const hasCreatedSession = useRef(false) // flag to ensure one-time session creation
-    const [loading, setLoading] = useState(false)
 
     const [createSession] = useMutation(CREATE_SESSION)
     const [askAgent, { loading: sending }] = useMutation(ASK_AGENT)
@@ -53,7 +59,6 @@ const ChatBot = ({ agentId }: { agentId: number }) => {
     useEffect(() => {
         if (data?.ai_agent_chatmessage) {
             setMessages(data.ai_agent_chatmessage)
-            setLoading(false)
             setTimeout(() => {
                 chatEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" })
             }, 50)
@@ -75,7 +80,6 @@ const ChatBot = ({ agentId }: { agentId: number }) => {
 
     const handleSend = async () => {
         if (!input.trim()) return
-        setLoading(true)
 
         await askAgent({
             variables: {

@@ -1,4 +1,3 @@
-import ecommerce from "../data/markdown/ecommerce-store.md?raw"
 import portfolioContent from "../data/markdown/portfolio-website.md?raw"
 import choice from "../data/markdown/choice.md?raw"
 import trippy from "../data/markdown/trippy-tools.md?raw"

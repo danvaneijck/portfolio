@@ -1,6 +1,6 @@
 import { FaGithubSquare, FaInstagramSquare, FaLinkedin, FaYoutubeSquare } from "react-icons/fa"
 import danPortrait from "../assets/dan.webp"
-import { animate, createDraggable, createScope, createSpring } from 'animejs';
+import { animate, createDraggable, createScope, createSpring, Scope } from 'animejs';
 import { useEffect, useRef } from "react";
 import ProjectsGrid from "../components/Projects";
 import TechMarquee from "../components/TechMarquee";
@@ -8,7 +8,7 @@ import TechMarquee from "../components/TechMarquee";
 const Home = () => {
 
     const root = useRef(null);
-    const scope = useRef(null);
+    const scope = useRef<Scope | null>(null)
 
     useEffect(() => {
         scope.current = createScope({ root }).add(scope => {
@@ -25,7 +25,9 @@ const Home = () => {
                 });
             });
         });
-        return () => scope.current.revert()
+        return () => {
+            if (scope.current) scope.current.revert()
+        }
     }, []);
 
     return (

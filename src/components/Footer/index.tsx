@@ -1,9 +1,9 @@
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const Footer = () => {
-    const [year, setYear] = useState<number>(new Date().getFullYear());
+    const [year] = useState<number>(new Date().getFullYear());
 
     const links = [
         { label: "Home", to: "/" },
@@ -81,7 +81,7 @@ const Footer = () => {
                 <div>© Daniel Van Eijck {year}</div>
                 <div className="mt-2 md:mt-0">
                     Built with <span className="font-semibold">React</span> &amp;{" "}
-                    <span className="font-semibold">Tailwind CSS</span>
+                    <span className="font-semibold">Tailwind CSS</span>
                 </div>
                 <button
                     onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

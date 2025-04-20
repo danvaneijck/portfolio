@@ -1,9 +1,9 @@
 // src/components/NavBar.tsx
-import React, { useState } from "react"
+import { useState } from "react"
 import { NavLink } from "react-router-dom"
 import { FaBars, FaTimes } from "react-icons/fa"
 
-const NavBar: React.FC = () => {
+const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const links = [
         { label: "Home", to: "/" },
