@@ -21,7 +21,7 @@ const ProjectsGrid = ({
                             bg-[#092327] text-white rounded-lg shadow p-4 flex flex-col
                             transform transition duration-300
                             hover:scale-105 hover:shadow-lg
-                            animate-fadeIn
+                            animate-fade-in opacity-0
                           `}
                         style={{ animationDelay: `${idx * 100}ms` }}
                     >
@@ -38,7 +38,7 @@ const ProjectsGrid = ({
                         </p>
                         <Link
                             to={`/projects/?project=${proj.key}`}
-                            className="mt-4 text-seaGreen hover:underline self-start"
+                            className="mt-4 text-sea-green hover:underline self-start"
                         >
                             Read more
                         </Link>

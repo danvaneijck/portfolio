@@ -37,7 +37,7 @@ const Footer = () => {
                 {/* Social Icons */}
                 <div className="flex space-x-4 text-xl">
                     <a
-                        href="https://github.com/your-username"
+                        href="https://github.com/danvaneijck"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-white"
@@ -45,7 +45,7 @@ const Footer = () => {
                         <FaGithub />
                     </a>
                     <a
-                        href="https://linkedin.com/in/your-username"
+                        href="https://www.linkedin.com/in/dan-van-eijck-30391718b"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-white"
@@ -53,7 +53,7 @@ const Footer = () => {
                         <FaLinkedin />
                     </a>
                     <a
-                        href="https://twitter.com/your-username"
+                        href="https://x.com/trippykiwiPRMR"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-white"
@@ -65,7 +65,7 @@ const Footer = () => {
                 {/* Contact */}
                 <div>
                     <a
-                        href="mailto:dan@example.com"
+                        href="mailto:dan.ve16587@gmail.com"
                         className="hover:text-white transition-colors"
                     >
                         dan.ve16587&#64;gmail.com

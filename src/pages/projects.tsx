@@ -42,8 +42,8 @@ const Projects: React.FC = () => {
                         prose-a:text-white
                         prose-code:before:content-none 
                         prose-code:after:content-none 
-                        prose-code:bg-gray-700 
-                        prose-code:px-1 
+                        prose-code:bg-gray-800 
+                        prose-code:p-1 
                         prose-code:rounded 
                         prose-pre:bg-gray-700
                          prose-pre:text-white

@@ -48,6 +48,7 @@ const ChatBot = ({ agentId }: { agentId: number }) => {
     const [messages, setMessages] = useState<Message[]>([])
     const chatEndRef = useRef<HTMLDivElement>(null)
     const hasCreatedSession = useRef(false) // flag to ensure one-time session creation
+    const [error, setError] = useState<string | null>(null)
 
     const [createSession] = useMutation(CREATE_SESSION)
     const [askAgent, { loading: sending }] = useMutation(ASK_AGENT)
@@ -73,8 +74,12 @@ const ChatBot = ({ agentId }: { agentId: number }) => {
                     session_id: sessionId,
                     created: dayjs().toISOString(),
                 },
+            }).then(() => {
+                hasCreatedSession.current = true
+
+            }).catch(() => {
+                setError("Server Unavailable, try again later")
             })
-            hasCreatedSession.current = true
         }
     }, [createSession, sessionId])
 
@@ -96,7 +101,7 @@ const ChatBot = ({ agentId }: { agentId: number }) => {
 
     return (
         <div className="w-full max-w-2xl mx-auto bg-gunmetal rounded-lg shadow p-4 flex flex-col h-[40vh]">
-            <div className="flex-1 overflow-y-auto space-y-2 p-2 bg-airForce rounded h-[400px]">
+            <div className="flex-1 overflow-y-auto space-y-2 p-2 bg-air-force rounded h-[400px]">
                 {messages.length == 0 &&
                     <div className="m-auto">
                         <img
@@ -111,7 +116,7 @@ const ChatBot = ({ agentId }: { agentId: number }) => {
                 {messages.map((msg) => (
                     <div
                         key={msg.id}
-                        className={`animate-slideUp p-3 rounded-lg max-w-[80%] w-fit ${msg.role === "user"
+                        className={`animate-slide-up p-3 rounded-lg max-w-[80%] w-fit ${msg.role === "user"
                             ? "bg-slate-600 self-end text-right ml-auto"
                             : "bg-gunmetal text-left"
                             }`}
@@ -121,21 +126,22 @@ const ChatBot = ({ agentId }: { agentId: number }) => {
                 ))}
 
                 <div ref={chatEndRef} />
+                {error && <div className="bg-red-700 text-center p-2 text-white font-semibold w-fit mx-auto rounded-lg">{error}</div>}
             </div>
 
             <div className="mt-4 flex">
                 <input
                     type="text"
-                    className="flex-1 border px-3 py-2 rounded-l focus:outline-none"
+                    className="flex-1 border px-3 py-2 rounded-l focus:outline-none text-white"
                     placeholder="Ask something..."
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSend()}
                 />
                 <button
-                    className="bg-darkSlate text-white px-4 py-2 rounded-r"
+                    className="bg-dark-slate text-white px-4 py-2 rounded-r"
                     onClick={handleSend}
-                    disabled={sending}
+                    disabled={sending || error !== null}
                 >
                     Send
                 </button>
