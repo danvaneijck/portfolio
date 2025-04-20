@@ -1,9 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @font-face {
   font-family: 'stoutface';
@@ -11,8 +8,9 @@
 }
 
 @font-face {
-  font-family: 'BebasNeue';
+  font-family: 'Bebas Neue';
   src: url('./fonts/BebasNeue-Regular.ttf');
 }
 
-
+@import "tailwindcss";
+@config "../tailwind.config.js";
