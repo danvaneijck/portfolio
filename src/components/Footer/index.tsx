@@ -53,7 +53,7 @@ const Footer = () => {
                         <FaLinkedin />
                     </a>
                     <a
-                        href="https://x.com/trippykiwiPRMR"
+                        href="https://x.com/trippykiwi"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-white"
@@ -65,10 +65,10 @@ const Footer = () => {
                 {/* Contact */}
                 <div>
                     <a
-                        href="mailto:dan.ve16587@gmail.com"
+                        href="mailto:danielvaneijck@gmail.com"
                         className="hover:text-white transition-colors"
                     >
-                        dan.ve16587&#64;gmail.com
+                        danielvaneijck&#64;gmail.com
                     </a>
                 </div>
             </div>

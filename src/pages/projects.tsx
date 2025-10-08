@@ -61,7 +61,10 @@ const Projects: React.FC = () => {
                 ) : (
                     <div>
                         <div className="text-white mb-5 text-center font-bebas text-2xl md:text-4xl">
-                            Projects
+                            Personal Projects
+                        </div>
+                        <div className="text-white mb-10 text-center w-full md:w-2/3 m-auto">
+                            Below is a selection of my personal projects that I have worked on in my spare time. Each project has a detailed description of the technologies used and the lessons learned while building them.
                         </div>
                         <ProjectsGrid maxProjects={undefined} />
                     </div>

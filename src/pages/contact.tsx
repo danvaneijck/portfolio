@@ -12,7 +12,7 @@ const Contact: React.FC = () => {
             <div className="flex items-center justify-center space-x-8 text-4xl">
                 {/* Email */}
                 <a
-                    href="mailto:dan.ve16587@gmail.com"
+                    href="mailto:danielvaneijck@gmail.com"
                     aria-label="Email"
                     className="text-gray-300 hover:text-white transition-colors"
                 >
