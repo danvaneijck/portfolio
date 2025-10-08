@@ -1,12 +1,12 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 import { gql, useMutation, useQuery } from "@apollo/client"
 import { v4 as uuidv4 } from "uuid"
 import dayjs from "dayjs";
 import chatFigure from "../../assets/chat_figure.png"
 
 const CREATE_SESSION = gql`
-  mutation ($session_id: uuid, $created: timestamptz) {
-    insert_ai_agent_chatsession_one(object: {agent_id: 1, session_id: $session_id, created_at: $created}) {
+  mutation ($session_id: uuid, $created: timestamptz, $agent_id: bigint!) {
+    insert_ai_agent_chatsession_one(object: {agent_id: $agent_id, session_id: $session_id, created_at: $created}) {
       id
       session_id
     }
@@ -42,13 +42,15 @@ interface Message {
     timestamp: string
 }
 
-const ChatBot = ({ agentId }: { agentId: number }) => {
+const ChatBot = () => {
     const [sessionId] = useState(uuidv4())
     const [input, setInput] = useState("")
     const [messages, setMessages] = useState<Message[]>([])
     const chatEndRef = useRef<HTMLDivElement>(null)
-    const hasCreatedSession = useRef(false) // flag to ensure one-time session creation
+    const hasCreatedSession = useRef(false)
     const [error, setError] = useState<string | null>(null)
+
+    const envAgentId = import.meta.env.VITE_AGENT_ID;
 
     const [createSession] = useMutation(CREATE_SESSION)
     const [askAgent, { loading: sending }] = useMutation(ASK_AGENT)
@@ -67,29 +69,33 @@ const ChatBot = ({ agentId }: { agentId: number }) => {
     }, [data])
 
     useEffect(() => {
-        if (!hasCreatedSession.current) {
-            console.log(sessionId, dayjs().format())
-            createSession({
-                variables: {
-                    session_id: sessionId,
-                    created: dayjs().toISOString(),
-                },
-            }).then(() => {
-                hasCreatedSession.current = true
-
-            }).catch(() => {
-                setError("Server Unavailable, try again later")
-            })
+        if (hasCreatedSession.current) {
+            return;
         }
-    }, [createSession, sessionId])
 
-    const handleSend = async () => {
+        hasCreatedSession.current = true;
+        console.log("Creating session:", sessionId, envAgentId);
+        createSession({
+            variables: {
+                session_id: sessionId,
+                created: dayjs().toISOString(),
+                agent_id: envAgentId
+            },
+        }).catch((e) => {
+            console.log(e);
+            setError("Server Unavailable, try again later");
+            hasCreatedSession.current = false;
+        });
+
+    }, [createSession, sessionId, envAgentId]);
+
+    const handleSend = useCallback(async () => {
         if (!input.trim()) return
 
         await askAgent({
             variables: {
                 session_id: sessionId,
-                agent_id: agentId,
+                agent_id: envAgentId,
                 message: input,
             },
         })
@@ -97,7 +103,7 @@ const ChatBot = ({ agentId }: { agentId: number }) => {
         setInput("")
         refetch()
 
-    }
+    }, [envAgentId, sessionId, input])
 
     return (
         <div className="w-full max-w-2xl mx-auto bg-gunmetal rounded-lg shadow p-4 flex flex-col h-[40vh]">

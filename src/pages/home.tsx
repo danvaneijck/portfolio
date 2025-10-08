@@ -4,6 +4,8 @@ import { animate, createDraggable, createScope, createSpring, Scope } from 'anim
 import { useEffect, useRef } from "react";
 import ProjectsGrid from "../components/Projects";
 import TechMarquee from "../components/TechMarquee";
+import GitHubCalendar from "react-github-calendar";
+import WorkExperience from "../components/WorkExperience";
 
 const Home = () => {
 
@@ -38,7 +40,7 @@ const Home = () => {
             >
                 <div>
                     <div
-                        className='text-center pt-5 md:pt-32 text-white flex flex-col md:flex-row justify-center items-center'
+                        className=' animate-fade-in text-center pt-5 md:pt-32 text-white flex flex-col md:flex-row justify-center items-center'
                     >
                         <img
                             src={danPortrait}
@@ -110,29 +112,41 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className="mt-10">
+                <div className="mt-10 animate-fade-in">
                     <div className="text-white mb-5 text-center font-bebas text-2xl md:text-4xl">
                         Tech
                     </div>
                     <TechMarquee />
                 </div>
 
-                <div className="mt-10 mb-10">
+
+
+                <div className="mt-10 animate-fade-in">
                     <div className="text-white mb-5 text-center font-bebas text-2xl md:text-4xl">
-                        My Projects
+                        Work Experience
+                    </div>
+                    <WorkExperience />
+                </div>
+
+                <div className="mt-10 ">
+                    <div className="text-white mb-5 text-center font-bebas text-2xl md:text-4xl">
+                        Personal Projects
                     </div>
                     <ProjectsGrid maxProjects={3} />
                 </div>
 
+                <div className="mt-10 mb-10 animate-fade-in">
+                    <div className="text-white mb-5 text-center font-bebas text-2xl md:text-4xl">
+                        Github Contributions
+                    </div>
+                    <div className="flex flex-row justify-center ">
+                        <GitHubCalendar style={{ color: "white" }} colorScheme="light" username="danvaneijck" />
+                    </div>
+                </div>
 
             </div>
 
-
-
-
-            {/* <Experience /> */}
-
-        </div>
+        </div >
 
     )
 }

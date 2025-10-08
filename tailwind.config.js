@@ -29,15 +29,15 @@ export default {
           '100%': { opacity: '1' },
         },
         marquee: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-100%)' },
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
       animation: {
         slideUp: 'slideUp 0.3s ease-out forwards',
         float: "float 5s ease-in-out infinite",
         fadeIn: 'fadeIn 0.5s ease-in forwards',
-        marquee: 'marquee 60s linear infinite',
+        marquee: 'marquee 25s linear infinite',
       },
       fontFamily: {
         bebas: ['"Bebas Neue"', 'sans-serif'],
