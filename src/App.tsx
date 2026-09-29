@@ -1,35 +1,21 @@
+import { Navigate, Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import CaseStudyPage from "./pages/CaseStudyPage";
+import NotFound from "./pages/NotFound";
 
-import Home from "./pages/home";
-import { ApolloProvider } from '@apollo/client';
-import client from "./utils/apolloClient";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
-import Projects from "./pages/projects";
-import Contact from "./pages/contact";
-import About from "./pages/about";
-
-function App() {
-
+export default function App() {
   return (
-    <ApolloProvider client={client}>
-      <Router>
-        <div className="flex flex-col min-h-screen">
-          <NavBar />
-          + <main className="flex-1 flex flex-col overflow-auto">
-            <Routes>
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/" element={<Home />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </Router>
-    </ApolloProvider>
-
-  )
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/work/:slug" element={<CaseStudyPage />} />
+        {/* Old routes. nginx 301s these too; this covers client-side links and the dev server. */}
+        <Route path="/about" element={<Navigate to="/#about" replace />} />
+        <Route path="/contact" element={<Navigate to="/#about" replace />} />
+        <Route path="/projects" element={<Navigate to="/#products" replace />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Layout>
+  );
 }
-
-export default App

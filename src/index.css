@@ -1,16 +1,168 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-
-
-@font-face {
-  font-family: 'stoutface';
-  src: url('./fonts/Stoutface.ttf');
-}
-
-@font-face {
-  font-family: 'Bebas Neue';
-  src: url('./fonts/BebasNeue-Regular.ttf');
-}
-
 @import "tailwindcss";
-@config "../tailwind.config.js";
+
+/* Direction A "spec sheet": light paper, slate ink, teal for the happy path, rust for the failure path. */
+:root {
+  --paper: #f4f5f2;
+  --sheet: #fbfbf9;
+  --ink: #1b232b;
+  --muted: #56626b;
+  --rule: #cbd2d6;
+  --signal: #0b6670;
+  --flag: #a34815;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #12181d;
+    --sheet: #182027;
+    --ink: #e3e8eb;
+    --muted: #9aa7b0;
+    --rule: #2d3943;
+    --signal: #5cc0c9;
+    --flag: #e39462;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-sheet: var(--sheet);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-signal: var(--signal);
+  --color-flag: var(--flag);
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  a {
+    text-underline-offset: 3px;
+  }
+  :focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--signal) 25%, transparent);
+  }
+}
+
+@layer components {
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .section-title {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 8px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    border: 1px solid var(--ink);
+    padding: 8px 14px;
+    text-decoration: none;
+    transition: background-color 120ms, color 120ms;
+  }
+  .btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn-primary:hover {
+    background: var(--signal);
+    border-color: var(--signal);
+    color: var(--paper);
+  }
+  .text-link {
+    color: var(--signal);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+  .text-link:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Case-study body copy */
+  .prose-cs {
+    max-width: 68ch;
+  }
+  .prose-cs > * + * {
+    margin-top: 1rem;
+  }
+  .prose-cs h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 2.25rem;
+    letter-spacing: -0.005em;
+  }
+  .prose-cs h2 + * {
+    margin-top: 0.5rem;
+  }
+  .prose-cs ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .prose-cs li + li {
+    margin-top: 0.4rem;
+  }
+  .prose-cs li::marker {
+    color: var(--muted);
+  }
+  .prose-cs code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--sheet);
+    border: 1px solid var(--rule);
+    padding: 0 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
