@@ -114,15 +114,15 @@ export const injective: Product[] = [
 export const platform = [
   {
     title: "Security",
-    text: "A CI gate across 13 apps that blocks deploys with fixable high or critical vulnerabilities, and a role-based API for support tooling with hashed per-person keys and a full audit log.",
+    text: "A CI gate across 13 apps that blocks deploys with fixable high or critical vulnerabilities, and an ASVS Level 2 review of BenchMarker covering all 260 controls.",
   },
   {
-    title: "Releases",
-    text: "A release register that links every deploy across 13 apps to its commit, security scan and rollback path.",
+    title: "AI tooling",
+    text: "An MCP server that gives AI support tooling role-gated access to all four backends, with hashed per-person keys, fail-closed writes and a full audit log. I use Claude Code with custom skills every day for development, releases and operations.",
   },
   {
-    title: "Observability",
-    text: "Overhauled logging and monitoring across the fleet (Prometheus, Grafana, Loki, Sentry) and found $13–22k a year in AWS savings.",
+    title: "Releases & observability",
+    text: "A release register that links every deploy across 13 apps to its commit, security scan and rollback path. Overhauled logging and monitoring (Prometheus, Grafana, Loki, Sentry) and found $13–22k a year in AWS savings.",
   },
   {
     title: "Infrastructure",
@@ -192,7 +192,7 @@ export const experience = [
     org: "Victoria University of Wellington",
     dates: "2019 – 2020",
     role: "Research Assistant",
-    text: "Blockchain in supply chains: using oracles to record each production step as an auditable record.",
+    text: "A report on using blockchain oracles to create auditable supply-chain records.",
   },
   {
     org: "Victoria University of Wellington",

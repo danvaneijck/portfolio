@@ -9,10 +9,10 @@ export default function PlatformOperations() {
         The trail and register are designed to serve as compliance evidence.
       </p>
 
-      <h2>An API built to be audited</h2>
+      <h2>An MCP server built to be audited</h2>
       <p>
-        Support tooling needed to read and change customer data across all four backends. I designed one role-based API
-        for it and rolled it out to each:
+        Our AI support tooling needed to read and change customer data across all four backends. I designed one MCP
+        server for it and rolled it out to each, so an agent only ever has the access its operator's role allows:
       </p>
       <ul>
         <li>per-person API keys, stored only as hashes, with rotation and immediate revocation;</li>
@@ -50,7 +50,8 @@ export default function PlatformOperations() {
       <h2>The team</h2>
       <p>
         I mentor the junior developers, review the team's pull requests, and write design docs and incident write-ups. I
-        also set up the shared development workspace and task tracker the team works from.
+        also set up the team's shared agentic engineering workspace: Claude Code skills for cutting releases, fixing
+        security findings and investigating production issues, plus the task tracker the team works from.
       </p>
     </>
   );

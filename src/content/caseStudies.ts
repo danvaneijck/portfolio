@@ -98,7 +98,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Keeping four products safe to change",
     label: "Security, releases & observability · Vention Lab",
     description:
-      "A CI security gate across 13 apps, an audited role-based API for support tooling, a release register, and a monitoring overhaul.",
+      "A CI security gate across 13 apps, an audited MCP server for AI support tooling, a release register, and a monitoring overhaul.",
     figures: [
       { label: "apps behind the CI gate", value: "13" },
       { label: "RunDeck jobs versioned", value: "142" },

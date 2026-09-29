@@ -81,6 +81,10 @@ export default function Home() {
             Outside my day job I build on the Injective blockchain: a decentralised exchange, its smart contracts, and a
             low-latency trading engine in Rust.
           </p>
+          <p className="mt-3 max-w-[52ch]">
+            I also work heavily with AI: MCP servers that give agents role-gated, audited access to production systems,
+            and Claude Code with custom skills for development, releases and operations.
+          </p>
           <ul className="mt-6 flex flex-wrap gap-2.5">
             <li>
               <a href={links.cv} download className="btn btn-primary">
