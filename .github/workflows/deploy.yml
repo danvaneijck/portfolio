@@ -72,10 +72,19 @@ jobs:
     needs: update-deploy-repo
     runs-on: ubuntu-latest
     steps:
+      # Join the tailnet as an ephemeral tag:ci node. The tailnet policy lets
+      # tag:ci reach tag:server on tcp:22 and nothing else.
+      - name: Join the tailnet
+        uses: tailscale/github-action@d1b6cd204f8dceda5b3eaad7f1f767be390056cd # v4.2.0
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+          ping: 100.103.91.20
       - name: Deploy to server
         env:
           SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_HOST: 100.103.91.20 # trippy's tailnet IP
           SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
           set -euo pipefail
