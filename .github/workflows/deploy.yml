@@ -73,13 +73,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to server
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            cd /var/lib/deploy/portfolio_deploy
-            git pull
-            docker compose pull
-            docker compose up -d
+        env:
+          SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_deploy
+          # The host key is pinned, not accepted on first use.
+          echo 'trippy ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII32dHVtZEO/8BRrdh1JYwzfuAiS87b92W/fF21/Am1Z' > ~/.ssh/known_hosts
+          # This key has no shell: it is pinned on the server to the forced
+          # command /usr/local/bin/trippy-deploy, which runs the portfolio
+          # deploy (git pull, compose pull, up -d) and refuses anything else.
+          ssh -i ~/.ssh/id_deploy \
+              -o BatchMode=yes -o StrictHostKeyChecking=yes -o HostKeyAlias=trippy \
+              "$SERVER_USER@$SERVER_HOST" \
+              portfolio
