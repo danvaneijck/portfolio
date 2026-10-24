@@ -39,39 +39,12 @@ jobs:
           cache-from: type=gha,scope=web
           cache-to: type=gha,mode=max,scope=web
 
-  update-deploy-repo:
+  deploy-to-server:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
       - id: version
         run: echo "tag=sha-$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_OUTPUT
-
-      - uses: actions/checkout@v4
-        with:
-          repository: ${{ github.repository_owner }}/portfolio_deploy
-          token: ${{ secrets.DEPLOY_REPO_TOKEN }}
-          path: deploy
-
-      - name: Update image tag
-        run: |
-          cd deploy
-          TAG="${{ steps.version.outputs.tag }}"
-          sed -i "s|\${WEB_TAG:-[^}]*}|\${WEB_TAG:-${TAG}}|g" docker-compose.yml
-          echo "Updated WEB_TAG -> ${TAG}"
-
-      - name: Commit and push
-        run: |
-          cd deploy
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docker-compose.yml
-          git diff --cached --quiet || git commit -m "Deploy ${{ steps.version.outputs.tag }}"
-          git push
-
-  deploy-to-server:
-    needs: update-deploy-repo
-    runs-on: ubuntu-latest
-    steps:
       # Join the tailnet as an ephemeral tag:ci node. The tailnet policy lets
       # tag:ci reach tag:server on tcp:22 and nothing else.
       - name: Join the tailnet
@@ -86,6 +59,7 @@ jobs:
           SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
           SERVER_HOST: 100.103.91.20 # trippy's tailnet IP
           SERVER_USER: ${{ secrets.SERVER_USER }}
+          TAG: ${{ steps.version.outputs.tag }}
         run: |
           set -euo pipefail
           umask 077
@@ -94,9 +68,11 @@ jobs:
           # The host key is pinned, not accepted on first use.
           echo 'trippy ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII32dHVtZEO/8BRrdh1JYwzfuAiS87b92W/fF21/Am1Z' > ~/.ssh/known_hosts
           # This key has no shell: it is pinned on the server to the forced
-          # command /usr/local/bin/trippy-deploy, which runs the portfolio
-          # deploy (git pull, compose pull, up -d) and refuses anything else.
+          # command /usr/local/bin/trippy-deploy, which checks the tag, pins it
+          # in the server-local .env, then pulls and restarts portfolio, and
+          # refuses anything else. CI has no write access to portfolio_deploy:
+          # whoever can push there is root on trippy.
           ssh -i ~/.ssh/id_deploy \
               -o BatchMode=yes -o StrictHostKeyChecking=yes -o HostKeyAlias=trippy \
               "$SERVER_USER@$SERVER_HOST" \
-              portfolio
+              "portfolio $TAG --all"
